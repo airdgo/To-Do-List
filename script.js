@@ -8,17 +8,13 @@ function setErrorFor () {
     formControl.className = 'form-control error';
 }
 
-function setErrorFor () {
-    
-}
-
 function clearAll () {
     list.innerHTML = "";
     return false;
 }
 
 function addItem () {
-    const input = document.querySelector('[data-input]').value;
+    let input = document.querySelector('[data-input]').value;
     const removeButton = document.createElement("button");
     const doneButton = document.createElement("button");
     const checkIcon = document.createElement("i")
@@ -33,7 +29,7 @@ function addItem () {
         formControl.className = 'form-control';
         listItem.innerText = input;
         list.appendChild(listItem);
-
+        
         doneButton.innerHTML = 'Done';
         doneButton.onclick = function() {
             doneButton.remove();
@@ -49,7 +45,10 @@ function addItem () {
         
         listItem.appendChild(doneButton);
         listItem.appendChild(removeButton);
+        
     }
+
+    document.querySelector('[data-input]').value = "";
     
     return false;
 }
