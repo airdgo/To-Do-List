@@ -5,7 +5,7 @@
     font-weight: normal;
 }
 
-body, p, h1, form, input, button, ul, li {
+body, p, h1, form, input, button, ul, ol, li {
     margin: 0;
     padding: 0;
 }
@@ -43,7 +43,7 @@ body {
 
 .list-output {
     margin-top: 1rem;
-    width: 25rem;
+    width: 100%;
 }
 
 .check-icon {
@@ -52,12 +52,13 @@ body {
     height: 1rem;
 }
 
-li {
-    display: flex;
+ol {
+    list-style: none;
 }
 
-li button {
-    order: 3;
+.done-button, 
+.remove-button {
+    cursor: pointer;
 }
 
 .list-wraper form {
@@ -75,4 +76,11 @@ li button {
 
 .form-control.error {
     visibility: visible;
+}
+
+.list-item {
+    margin: 1em 0;
+    padding: .5em 0;
+    padding-left: 1em;
+    border: 1px solid #121212;
 }

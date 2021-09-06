@@ -31,6 +31,7 @@ function addItem () {
         list.appendChild(listItem);
         
         doneButton.innerHTML = 'Done';
+        doneButton.className = 'done-button';
         doneButton.onclick = function() {
             doneButton.remove();
             listItem.appendChild(checkIcon);
@@ -38,17 +39,19 @@ function addItem () {
         };
 
         removeButton.innerHTML = 'X';
+        removeButton.className = 'remove-button';
         removeButton.onclick = function() {
             removeButton.parentElement.remove()
             return;
         };
         
         listItem.appendChild(doneButton);
+        
         listItem.appendChild(removeButton);
         
     }
 
     document.querySelector('[data-input]').value = "";
-    
+
     return false;
 }
