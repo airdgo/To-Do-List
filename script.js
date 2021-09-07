@@ -1,11 +1,14 @@
-const submit = document.querySelector('[data-submit]');
-const clearList = document.querySelector('[data-clear-list]');
 const list = document.querySelector('[data-list]');
-const input = document.querySelector('[data-input]').value;
 
-function setErrorFor () {
-    const formControl = document.getElementsByClassName('form-control');
+
+function setError () {
+    const formControl = document.getElementById('form-control');
     formControl.className = 'form-control error';
+}
+
+function setSucces () {
+    const formControl = document.getElementById('form-control');
+    formControl.className = 'form-control';
 }
 
 function clearAll () {
@@ -15,43 +18,53 @@ function clearAll () {
 
 function addItem () {
     let input = document.querySelector('[data-input]').value;
-    const removeButton = document.createElement("button");
-    const doneButton = document.createElement("button");
-    const checkIcon = document.createElement("i")
-    checkIcon.className = 'check-icon fa fa-check';
     let listItem = document.createElement("li");
-    listItem.className = "list-item";
+    const doneButton = document.createElement("button");
+    const removeButton = document.createElement("button");
 
-    const formControl = document.getElementById('form-control');
-    if(input === '') {
-       formControl.className = 'form-control error';
-    } else {
-        formControl.className = 'form-control';
+
+    function appendItem () {
+        listItem.className = "list-item";
         listItem.innerText = input;
         list.appendChild(listItem);
         
+    }
+
+    function doneButtonFunc () {
+        const checkIcon = document.createElement("i")
+        checkIcon.className = 'check-icon fa fa-check';
         doneButton.innerHTML = 'Done';
         doneButton.className = 'done-button';
-        doneButton.onclick = function() {
+        doneButton.onclick = function () {
             doneButton.remove();
             listItem.appendChild(checkIcon);
             return;
         };
+        listItem.appendChild(doneButton);
+    }
 
+    function removeButtonFunc () {
         removeButton.innerHTML = 'X';
         removeButton.className = 'remove-button';
-        removeButton.onclick = function() {
+        removeButton.onclick = () => {
             removeButton.parentElement.remove()
             return;
         };
-        
-        listItem.appendChild(doneButton);
-        
         listItem.appendChild(removeButton);
-        
     }
 
-    document.querySelector('[data-input]').value = "";
+    const resetInput = () => document.querySelector('[data-input]').value = "";
+
+    if(input === '') {
+       setError();
+    } else {
+        setSucces ();
+        appendItem ();
+        doneButtonFunc ();
+        removeButtonFunc ();
+    }
+
+    resetInput();
 
     return false;
 }
