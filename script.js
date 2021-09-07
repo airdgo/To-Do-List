@@ -19,7 +19,6 @@ function clearAll () {
 function addItem () {
     let input = document.querySelector('[data-input]').value;
     let listItem = document.createElement("li");
-    const doneButton = document.createElement("button");
     const removeButton = document.createElement("button");
 
 
@@ -30,17 +29,12 @@ function addItem () {
         
     }
 
-    function doneButtonFunc () {
-        const checkIcon = document.createElement("i")
-        checkIcon.className = 'check-icon fa fa-check';
-        doneButton.innerHTML = 'Done';
-        doneButton.className = 'done-button';
-        doneButton.onclick = function () {
-            doneButton.remove();
-            listItem.appendChild(checkIcon);
-            return;
-        };
-        listItem.appendChild(doneButton);
+    function checkBoxFunc () {
+        const checkBox = document.createElement("input");
+        checkBox.type = "checkbox";
+        checkBox.className = "checkbox";
+
+        listItem.appendChild(checkBox);
     }
 
     function removeButtonFunc () {
@@ -60,7 +54,7 @@ function addItem () {
     } else {
         setSucces ();
         appendItem ();
-        doneButtonFunc ();
+        checkBoxFunc ();
         removeButtonFunc ();
     }
 
