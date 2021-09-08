@@ -1,20 +1,16 @@
 const list = document.querySelector('[data-list]');
+const clearButton = document.querySelector('[data-clear-list]');
+const submitButton = document.querySelector('[data-submit]');
 
-
-function setError () {
-    const formControl = document.getElementById('form-control');
-    formControl.className = 'form-control error';
-}
-
-function setSucces () {
-    const formControl = document.getElementById('form-control');
-    formControl.className = 'form-control';
-}
-
-function clearAll () {
+clearButton.addEventListener('click', e => {
+    e.preventDefault();
     list.innerHTML = "";
-    return false;
-}
+})
+
+submitButton.addEventListener('click', e => {
+    e.preventDefault();
+    addItem();
+})
 
 function addItem () {
     let input = document.querySelector('[data-input]').value;
@@ -65,4 +61,14 @@ function addItem () {
     resetInput();
 
     return false;
+}
+
+function setError () {
+    const formControl = document.getElementById('form-control');
+    formControl.className = 'form-control error';
+}
+
+function setSucces () {
+    const formControl = document.getElementById('form-control');
+    formControl.className = 'form-control';
 }
