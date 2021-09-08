@@ -19,21 +19,25 @@ function clearAll () {
 function addItem () {
     let input = document.querySelector('[data-input]').value;
     let listItem = document.createElement("li");
+    const listItemParagraph = document.createElement('p');
+    listItemParagraph.className = 'list-item-paragraph';
     const removeButton = document.createElement("button");
 
 
     function appendItem () {
+        listItemParagraph.innerText = input;
         listItem.className = "list-item";
-        listItem.innerText = input;
+        listItem.appendChild(listItemParagraph);
         list.appendChild(listItem);
-        
     }
 
     function checkBoxFunc () {
         const checkBox = document.createElement("input");
         checkBox.type = "checkbox";
         checkBox.className = "checkbox";
-
+        checkBox.onclick = () => {
+            listItemParagraph.classList.toggle('checked');
+        }
         listItem.appendChild(checkBox);
     }
 

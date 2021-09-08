@@ -1,4 +1,6 @@
 @import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css");
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Oswald&family=Roboto+Mono&display=swap');
 
 *, *::before, *::after {
     box-sizing: border-box;
@@ -8,6 +10,13 @@
 body, p, h1, form, input, button, ul, ol, li {
     margin: 0;
     padding: 0;
+}
+
+h1 {
+    font-family: 'Bebas Neue';
+    font-size: 4rem;
+    color: #fbfbfb;
+    margin-bottom: .2em;
 }
 
 body {
@@ -28,20 +37,37 @@ body {
     padding: 2em 4em;
 }
 
-.list-wraper h1 {
-    color: #fbfbfb;
-    margin-bottom: .5em;
+.list-container {
+    max-width: 50rem;
+    width: 50%;
 }
 
 .add-item {
+    font-family: 'Roboto Mono';
+    font-size: 1rem;
+    background-color: #fbfbfb;
+    border: none;
     outline: none;
     width: 25rem;
     padding: .5em 1em;
 }
 
+.form {
+    display: flex;
+}
+
 .submit, .clear-list {
+    font-family: Oswald;
+    font-size: 1rem;
+    background-color: #fbfbfb;
+    color: #aa3333;
+    border: none;
     cursor: pointer;
-    padding: .5em 1em;
+    padding: .47em 1em;
+}
+
+.submit {
+    margin: 0 1rem;
 }
 
 .list-output {
@@ -104,4 +130,13 @@ input[type="checkbox"] {
 
 .remove-button:hover {
     opacity: 80%;
+}
+
+.list-item-paragraph {
+    font-family: 'Roboto Mono';
+    letter-spacing: 1px;
+}
+
+.list-item-paragraph.checked {
+    text-decoration: line-through;
 }
