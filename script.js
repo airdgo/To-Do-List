@@ -1,74 +1,77 @@
-const list = document.querySelector('[data-list]');
-const clearButton = document.querySelector('[data-clear-list]');
-const submitButton = document.querySelector('[data-submit]');
+const input = document.querySelector('[data-input]');
+const submit = document.querySelector('[data-submit]');
+const clearList = document.querySelector('[data-clear-list]');
 
-clearButton.addEventListener('click', e => {
+submit.addEventListener('click', e => {
     e.preventDefault();
-    list.innerHTML = "";
-})
 
-submitButton.addEventListener('click', e => {
-    e.preventDefault();
-    addItem();
-})
-
-function addItem () {
-    let input = document.querySelector('[data-input]').value;
-    let listItem = document.createElement("li");
-    const listItemParagraph = document.createElement('p');
-    listItemParagraph.className = 'list-item-paragraph';
-    const removeButton = document.createElement("button");
-
-
-    function appendItem () {
-        listItemParagraph.innerText = input;
-        listItem.className = "list-item";
-        listItem.appendChild(listItemParagraph);
-        list.appendChild(listItem);
-    }
-
-    function checkBoxFunc () {
-        const checkBox = document.createElement("input");
-        checkBox.type = "checkbox";
-        checkBox.className = "checkbox";
-        checkBox.onclick = () => {
-            listItemParagraph.classList.toggle('checked');
-        }
-        listItem.appendChild(checkBox);
-    }
-
-    function removeButtonFunc () {
-        removeButton.innerHTML = 'X';
-        removeButton.className = 'remove-button';
-        removeButton.onclick = () => {
-            removeButton.parentElement.remove()
-            return;
-        };
-        listItem.appendChild(removeButton);
-    }
-
-    const resetInput = () => document.querySelector('[data-input]').value = "";
-
-    if(input === '') {
-       setError();
+    // Add input to local storage
+    const toDoList = localStorage.getItem('toDoList');
+    if (toDoList == null) {
+        toDoListObj = [];
     } else {
-        setSucces ();
-        appendItem ();
-        checkBoxFunc ();
-        removeButtonFunc ();
+        toDoListObj = JSON.parse(toDoList);
+    };
+
+    myObj = {
+        input: input.value
+    };
+
+    toDoListObj.push(myObj);
+    localStorage.setItem('toDoList', JSON.stringify(toDoListObj));
+    input.value = '';
+
+    showToDoList();
+})
+
+// Take user input from local storage and display it on the page
+const showToDoList = () => {
+    const toDoList = localStorage.getItem('toDoList');
+    if (toDoList == null) {
+        toDoListObj = [];
+    } else {
+        toDoListObj = JSON.parse(toDoList);
+    };
+
+    html = '';
+    toDoListObj.forEach((element, index) => {
+        html += `
+            <li class="list-item">
+                <p class="list-item-paragraph">${element.input}</p>
+                <input id="${index}" class="checkbox" type="checkbox" data-checkbox onclick="checkBox()">
+                <button id="${index}" class="remove-button" onclick="removeNote(this.id)">X</button>
+            </li>
+        `
+    });
+
+    let list = document.querySelector('[data-list]');
+
+    if (toDoListObj != 0) {
+        list.innerHTML = html;
+    } else {
+        list.innerHTML = `<li>Add a to do</li>`
     }
 
-    resetInput();
-
-    return false;
 }
 
-function setError () {
-    const formControl = document.getElementById('form-control');
-    formControl.className = 'form-control error';
+// Clear all notes
+clearList.onclick = () => {
+    localStorage.clear();
 }
 
-function setSucces () {
-    const formControl = document.getElementById('form-control');
-    formControl.className = 'form-control';
+// Remove a note
+const removeNote = (index) => {
+    const toDoList = localStorage.getItem('toDoList');
+    if (toDoList == null) {
+        toDoListObj = [];
+    } else {
+        toDoListObj = JSON.parse(toDoList);
+    };
+    toDoListObj.splice(index, 1);
+    localStorage.setItem('toDoList', JSON.stringify(toDoListObj));
+    location.reload();
 }
+
+// Store checkbox value
+
+showToDoList();
