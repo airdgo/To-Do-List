@@ -14,7 +14,8 @@ submit.addEventListener('click', e => {
     };
 
     myObj = {
-        input: input.value
+        input: input.value,
+        isCompleted: false
     };
 
     toDoListObj.push(myObj);
@@ -37,9 +38,9 @@ const showToDoList = () => {
     toDoListObj.forEach((element, index) => {
         html += `
             <li class="list-item">
-                <p class="list-item-paragraph">${element.input}</p>
-                <input id="${index}" class="checkbox" type="checkbox" data-checkbox onclick="checkBox()">
-                <button id="${index}" class="remove-button" onclick="removeNote(this.id)">X</button>
+                <p id="${index}" class="list-item-paragraph">${element.input}</p>
+                <button id="${index}" class="checkbox" onclick="checkNote(this.id)"><i class="fas fa-check-circle"></i></button>
+                <button id="${index}" class="remove-button" onclick="removeNote(this.id)"><i class="fas fa-trash-alt"></i></button>
             </li>
         `
     });
@@ -59,6 +60,22 @@ clearList.onclick = () => {
     localStorage.clear();
 }
 
+let toDoList = localStorage.getItem('toDoList');
+
+// Check if note is checked
+const checkNote = (index) => {
+    toDoList = localStorage.getItem('toDoList');
+    if (toDoList == null) {
+        toDoListObj = [];
+    } else {
+        toDoListObj = JSON.parse(toDoList);
+    };
+
+
+    localStorage.setItem('toDoList', JSON.stringify(toDoListObj));
+}
+
+
 // Remove a note
 const removeNote = (index) => {
     const toDoList = localStorage.getItem('toDoList');
@@ -71,7 +88,5 @@ const removeNote = (index) => {
     localStorage.setItem('toDoList', JSON.stringify(toDoListObj));
     location.reload();
 }
-
-// Store checkbox value
 
 showToDoList();
