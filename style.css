@@ -107,11 +107,6 @@ ol {
     border-radius: .5em;
 }
 
-.list-item.remove {
-    display: none;
-}
-
-
 .checkbox {
     order: -1;
     color: rgb(0, 97, 0);
@@ -145,6 +140,6 @@ ol {
     letter-spacing: 1px;
 }
 
-.list-item-paragraph.checked {
+.list-item-paragraph.lineThrough {
     text-decoration: line-through;
 }
