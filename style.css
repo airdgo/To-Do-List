@@ -39,7 +39,7 @@ body {
 
 .list-container {
     max-width: 50rem;
-    width: 50%;
+    width: 90%;
 }
 
 .add-item {
@@ -48,12 +48,15 @@ body {
     background-color: #fbfbfb;
     border: none;
     outline: none;
-    width: 25rem;
+    width: 80%;
+    max-width: 25rem;
     padding: .5em 1em;
 }
 
 .form {
     display: flex;
+    justify-content: center;
+    width: 100%;
 }
 
 .submit, .clear-list {
@@ -64,6 +67,7 @@ body {
     border: none;
     cursor: pointer;
     padding: .47em 1em;
+    white-space: nowrap;
 }
 
 .submit {
@@ -142,4 +146,50 @@ ol {
 
 .list-item-paragraph.lineThrough {
     text-decoration: line-through;
+    opacity: .7;
+}
+
+.form-buttons {
+    display: flex;
+
+}
+
+@media (max-width: 650px) {
+    .form {
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .add-item {
+        width: 100%;
+    }
+    
+    .submit, .clear-list {
+        margin: 1rem .5rem 0 .5rem;
+    }
+
+    .list-wraper {
+        padding: 2rem 2rem;
+    }
+}
+
+@media (max-width: 500px) {
+    .list-wraper h1 {
+        font-size: 3rem;
+    }
+    .list-wraper {
+        padding: 1rem 1.5rem;
+    }
+    .add-item,
+    .submit,
+    .clear-list,
+    .list-item-paragraph {
+        font-size: .9rem;
+    }
+    .checkbox {
+        font-size: 1.7rem;
+    }
+    .remove-button {
+        font-size: 1rem;
+    }
 }

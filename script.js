@@ -16,7 +16,7 @@ let LIST = [],
 // Get items from local storage
 let data = localStorage.getItem("TODO");
 
-// check if data is not empty
+// Check if data is not empty
 if (data) {
     LIST = JSON.parse(data);
     id = LIST.length; // set the id to the last one in the list
@@ -82,6 +82,8 @@ const completeToDo = (element) => {
 const removeToDo = (element) => {
     element.parentNode.parentNode.removeChild(element.parentNode);
     LIST[element.id].trash = true;
+    console.log(element);
+
 };
 
 // Target items created dynamically
